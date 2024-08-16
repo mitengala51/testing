@@ -15,13 +15,13 @@ function geoFindMe() {
         mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
         mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
-        // Fetch altitude data from Open-Meteo API
+        // Fetch altitude data from Open Elevation API
         const url = `https://api.open-meteo.com/v1/elevation?latitude=${latitude}&longitude=${longitude}`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                const altitude = data.elevation;
+                const altitude = data.results[0].elevation;
                 altitudeOutput.textContent = `Altitude: ${altitude} meters`;
             })
             .catch(error => {
